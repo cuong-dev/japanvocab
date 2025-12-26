@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tiếng Nhật Online</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="logo">JP Learning</h2>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li>
+                    <a href="#" class="nav-link active" onclick="openTab(event, 'tab-tratu')">
+                        🔍 Tra từ
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" onclick="openTab(event, 'tab-kanji')">
+                        字 Kanji đại cương
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" onclick="openTab(event, 'tab-sotay')">
+                        📒 Sổ tay
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>&copy; 2024 MyWeb</p>
+        </div>
+    </aside>
+
+    <main class="main-wrapper">
+        <div class="content-container">
+
+        <section id="tab-tratu" class="tab-content active">
+                        
+                        <div class="sticky-search-header">
+                            <div class="search-box-wrapper">
+                                <h1 class="page-title">辞書 • Từ điển</h1>
+                                <div class="search-box">
+                                    <input type="text" id="searchInput" placeholder="Nhập từ vựng (Vd: 食べる)...">
+                                    <button onclick="mockSearch()">Tra cứu</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="searchPlaceholder" class="placeholder-screen">
+                            <div class="p-icon">🗻</div>
+                            <h3>Nhập từ vựng để khám phá</h3>
+                        </div>
+
+                        <div id="searchResultArea" style="display: none;">
+                            
+                            <div class="bento-container">
+
+                                <div class="bento-item area-header">
+                                    <div class="word-primary">
+                                        <div class="w-jp">
+                                            <ruby>食<rt>た</rt></ruby>べる
+                                            <button class="btn-audio-mini">🔊</button>
+                                        </div>
+                                        <div class="w-tags">
+                                            <span class="tag tag-pos">Động từ Nhóm 2</span>
+                                            <span class="tag tag-jlpt">N5</span>
+                                        </div>
+                                    </div>
+                                    <div class="word-meaning">
+                                        <h2>Ăn, dùng bữa</h2>
+                                        <p>Hành động đưa thức ăn vào miệng, nhai và nuốt.</p>
+                                    </div>
+                                </div>
+
+                                <div class="bento-item area-kanji">
+                                    <h4 class="b-title">🧩 Phân tích Hán Tự</h4>
+                                    <div class="kanji-box">
+                                        <div class="k-char">食</div>
+                                        <div class="k-info">
+                                            <div class="k-name">THỰC</div>
+                                            <ul class="k-yomi">
+                                                <li><span>Kun:</span> ta(beru), ku(u)</li>
+                                                <li><span>On:</span> SHOKU, JIKI</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mnemonic-box">
+                                        <strong>💡 Ghi nhớ:</strong>
+                                        "Người (人) tốt (良) thì lương tâm thanh thản nên ăn uống (食) ngon miệng."
+                                    </div>
+                                </div>
+
+                                <div class="bento-item area-grammar">
+                                    <h4 class="b-title">⚙️ Cấu trúc từ</h4>
+                                    <div class="grammar-grid">
+                                        <div class="g-row">
+                                            <span class="g-lbl">Trợ từ:</span>
+                                            <span class="g-val"><strong>を</strong> (Làm gì đó)</span>
+                                        </div>
+                                        <div class="g-row">
+                                            <span class="g-lbl">Tự/Tha:</span>
+                                            <div class="trans-pair">
+                                                <span class="active">Tha: 食べる</span> ↔ <span>Tự: 食べられる</span>
+                                            </div>
+                                        </div>
+                                        <div class="g-row">
+                                            <span class="g-lbl">Từ gia đình:</span>
+                                            <div class="fam-words">
+                                                <span>食べ物 (Đồ ăn)</span>, <span>食堂 (Nhà ăn)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bento-item area-nuance">
+                                    <h4 class="b-title">🎭 Sắc thái & Kính ngữ</h4>
+                                    <div class="nuance-content">
+                                        <p><strong>Văn phong:</strong> <span class="badge-soft">Mềm (Hội thoại)</span></p>
+                                        <div class="keigo-table">
+                                            <div class="k-row">
+                                                <span>⬆️ Tôn kính:</span> 
+                                                <strong>召し上がる</strong> (Meshiagaru)
+                                            </div>
+                                            <div class="k-row">
+                                                <span>⬇️ Khiêm nhường:</span> 
+                                                <strong>いただく</strong> (Itadaku)
+                                            </div>
+                                        </div>
+                                        <div class="mistake-alert">
+                                            ⚠️ <strong>Lỗi sai:</strong> Khác với 噛む (Cắn/Nhai).
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bento-item area-examples">
+                                    <h4 class="b-title">📖 Ví dụ thực tế</h4>
+                                    <ul class="example-list">
+                                        <li>
+                                            <p class="jp">毎朝、パンを<strong>食べます</strong>。</p>
+                                            <p class="vn">Mỗi sáng tôi đều ăn bánh mì.</p>
+                                        </li>
+                                        <li>
+                                            <p class="jp">日本料理を<strong>食べた</strong>ことがありますか。</p>
+                                            <p class="vn">Bạn đã từng ăn món Nhật chưa?</p>
+                                        </li>
+                                        <li>
+                                            <p class="jp">お腹がいっぱいで、もう<strong>食べられません</strong>。</p>
+                                            <p class="vn">Bụng no quá, tôi không ăn nổi nữa.</p>
+                                        </li>
+                                        <li>
+                                            <p class="jp">一緒に昼ご飯を<strong>食べよう</strong>。</p>
+                                            <p class="vn">Cùng đi ăn trưa nhé.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="bento-item area-colloc">
+                                    <h4 class="b-title">🔗 Kết hợp từ</h4>
+                                    <ul class="colloc-list">
+                                        <li>朝ご飯を食べる (Ăn sáng)</li>
+                                        <li>外食する (Ăn tiệm)</li>
+                                        <li>箸で食べる (Ăn bằng đũa)</li>
+                                    </ul>
+                                    <h4 class="b-title mt-2">🔄 Đồng nghĩa</h4>
+                                    <ul class="synonym-list">
+                                        <li>食らう (Thô tục)</li>
+                                        <li>摂る (Hấp thụ/Dùng bữa)</li>
+                                    </ul>
+                                </div>
+
+                                <div class="bento-item area-conjugation">
+                                    <details open> <summary>⚡ Bảng chia 12 thể động từ</summary>
+                                        <div class="conju-grid-full">
+                                            <div class="cj-cell"><small>Từ điển (る)</small><b>食べる</b></div>
+                                            <div class="cj-cell"><small>Lịch sự (ます)</small><b>食べます</b></div>
+                                            <div class="cj-cell"><small>Phủ định (ない)</small><b>食べない</b></div>
+                                            <div class="cj-cell"><small>Quá khứ (た)</small><b>食べた</b></div>
+                                            <div class="cj-cell"><small>Tiếp diễn (て)</small><b>食べて</b></div>
+                                            <div class="cj-cell"><small>Ý chí (よう)</small><b>食べよう</b></div>
+                                            <div class="cj-cell"><small>Khả năng</small><b>食べられる</b></div>
+                                            <div class="cj-cell"><small>Bị động</small><b>食べられる</b></div>
+                                            <div class="cj-cell"><small>Sai khiến</small><b>食べさせる</b></div>
+                                            <div class="cj-cell"><small>Mệnh lệnh</small><b>食べろ</b></div>
+                                            <div class="cj-cell"><small>Cấm chỉ</small><b>食べるな</b></div>
+                                            <div class="cj-cell"><small>BĐ sai khiến</small><b>食べさせられる</b></div>
+                                        </div>
+                                    </details>
+                                </div>
+
+                            </div> </div>
+                    </section>
+
+                    <section id="tab-kanji" class="tab-content" style="display: none;">
+                        <header class="section-header">
+                            <h1>2136 Hán tự thường dùng</h1>
+                        </header>
+
+                        <div class="kanji-grid">
+                            <div class="kanji-card">
+                                <div class="k-char">日</div>
+                                <div class="k-meaning">Mặt trời/Ngày</div>
+                                <div class="k-unyomi">hi</div>
+                            </div>
+                            <div class="kanji-card">
+                                <div class="k-char">月</div>
+                                <div class="k-meaning">Mặt trăng/Tháng</div>
+                                <div class="k-unyomi">tsuki</div>
+                            </div>
+                            <div class="kanji-card">
+                                <div class="k-char">火</div>
+                                <div class="k-meaning">Lửa</div>
+                                <div class="k-unyomi">hi</div>
+                            </div>
+                            <div class="kanji-card">
+                                <div class="k-char">水</div>
+                                <div class="k-meaning">Nước</div>
+                                <div class="k-unyomi">mizu</div>
+                            </div>
+                        </div>
+                    </section>
+
+                <section id="tab-sotay" class="tab-content" style="display: none;">
+                    
+                    <div class="user-input-area">
+                        <h2 class="section-title">✍️ Thêm từ mới vào kho</h2>
+                        <form id="vocabForm" onsubmit="addVocab(event)">
+                            <div class="input-grid">
+                                <div class="input-group">
+                                    <label>Từ vựng chính (Kanji / Katakana)</label>
+                                    <input type="text" id="inpWord" placeholder="Vd: 猫 hoặc ケーキ" required oninput="clearError()">
+                                </div>
+                                <div class="input-group">
+                                    <label>Cấp độ (JLPT)</label>
+                                    <select id="inpLevel">
+                                        <option value="N5">N5 - Sơ cấp 1</option>
+                                        <option value="N4">N4 - Sơ cấp 2</option>
+                                        <option value="N3">N3 - Trung cấp</option>
+                                        <option value="N2">N2 - Thượng cấp</option>
+                                        <option value="N1">N1 - Cao cấp</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group">
+                                    <label>Cách đọc (Hiragana / Romaji)</label>
+                                    <input type="text" id="inpReading" placeholder="Vd: ねこ (neko)" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Nghĩa tiếng Việt</label>
+                                    <input type="text" id="inpMeaning" placeholder="Vd: Con mèo" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-save">💾 Lưu vào sổ tay</button>
+                        </form>
+                    </div>
+
+                    <div class="level-tabs">
+                        <button class="lvl-btn active" onclick="filterLevel('ALL')">Tất cả</button>
+                        <button class="lvl-btn" onclick="filterLevel('N5')">N5</button>
+                        <button class="lvl-btn" onclick="filterLevel('N4')">N4</button>
+                        <button class="lvl-btn" onclick="filterLevel('N3')">N3</button>
+                        <button class="lvl-btn" onclick="filterLevel('N2')">N2</button>
+                        <button class="lvl-btn" onclick="filterLevel('N1')">N1</button>
+                    </div>
+
+                    <div id="vocabList" class="user-vocab-grid"></div>
+
+                </section>
+
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+/* --- 1. CẤU HÌNH BIẾN MÀU TRUYỀN THỐNG NHẬT BẢN --- */
+:root {
+    --sidebar-width: 280px;
+    
+    /* Bảng màu Nippon Colors */
+    --katsuiro: #192a56;    /* Màu chàm đậm (Indigo) - Chủ đạo */
+    --shuiro: #c0392b;      /* Màu đỏ cổng Torii - Điểm nhấn */
+    --matcha: #27ae60;      /* Màu xanh trà - Cho ghi nhớ/mẹo */
+    --yamabuki: #f1c40f;    /* Màu vàng hoa - Highlight */
+    
+    --washi-bg: #fcfaf2;    /* Màu giấy Washi (Kem nhẹ) */
+    --sumi-text: #2d3436;   /* Màu mực tàu (Đen xám) */
+    --paper-white: #ffffff;
+    
+    /* Font chữ */
+    /* Noto Serif JP cho tiêu đề (như sách giáo khoa) */
+    /* Noto Sans JP cho nội dung dễ đọc */
+    --font-serif: 'Noto Serif JP', serif; 
+    --font-sans: 'Noto Sans JP', sans-serif;
+}
+
+/* --- 2. RESET & GLOBAL STYLE --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--washi-bg); /* Nền màu giấy */
+    color: var(--sumi-text);
+    display: flex;
+    line-height: 1.6;
+    /* Thêm vân giấy nhẹ cho toàn trang (Optional) */
+    background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Import thêm font Serif cho giống sách */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+
+/* --- 3. SIDEBAR (PHONG CÁCH CỔ ĐIỂN) --- */
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--katsuiro);
+    color: #ecf0f1;
+    position: sticky;
+    top: 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-right: 4px solid #131f40; /* Viền đậm tạo độ dày */
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    text-align: center;
+    background-color: rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo {
+    font-family: var(--font-serif); /* Logo dùng font có chân */
+    font-weight: 700;
+    font-size: 1.8em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+/* Tạo dấu triện đỏ bên cạnh logo */
+.logo::after {
+    content: 'JP';
+    display: inline-block;
+    font-size: 0.4em;
+    background: var(--shuiro);
+    color: white;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+    border: 1px solid white;
+}
+
+.sidebar-nav ul { list-style: none; padding-top: 20px; }
+
+.nav-link {
+    display: block;
+    padding: 18px 25px;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-family: var(--font-serif); /* Menu dùng font có chân */
+    border-left: 5px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: #2c3e50;
+    color: #fff;
+    border-left-color: var(--shuiro); /* Vạch đỏ bên trái */
+    padding-left: 30px; /* Hiệu ứng đẩy nhẹ sang phải */
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px;
+    font-size: 0.8em;
+    text-align: center;
+    opacity: 0.6;
+    font-family: var(--font-sans);
+}
+
+/* --- 4. MAIN CONTENT & SEARCH --- */
+.main-wrapper {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.content-container {
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-family: var(--font-serif);
+    color: var(--katsuiro);
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.sticky-search-header {
+    background: var(--washi-bg);
+    padding: 0 0 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.section-header h1 {
+    font-family: var(--font-serif);
+    color: var(--katsuiro);
+    font-size: 2em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--shuiro); /* Gạch chân đỏ */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.search-box {
+    width: 60%; /* Chiếm 60% chiều ngang */
+    display: flex;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.search-box input { border: none; outline: none; flex: 1; padding: 10px; font-size: 1em; }
+.search-box button { background: var(--katsuiro); color: white; border: none; padding: 0 20px; border-radius: 2px; cursor: pointer; }
+
+.search-box-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box button:hover {
+    background-color: var(--shuiro); /* Hover đổi sang màu đỏ */
+}
+
+/* --- 5. WORD DETAIL CARD (STYLE GIẤY & CON DẤU) --- */
+.word-detail-card {
+    background: var(--paper-white);
+    border-radius: 4px; /* Bo góc ít thôi cho giống giấy */
+    /* Hiệu ứng bóng đổ nhẹ nhàng hơn */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 8px 16px rgba(0,0,0,0.05);
+    overflow: hidden;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    position: relative;
+}
+
+/* Trang trí: Thêm một vạch màu đỏ bên trái thẻ giống gáy sách */
+.word-detail-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background-color: var(--shuiro);
+    z-index: 1;
+}
+
+.wd-header {
+    background-color: #fdfdfd;
+    padding: 30px 40px;
+    border-bottom: 1px dashed #ccc; /* Đường kẻ đứt nét giống phiếu */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.wd-word {
+    font-family: var(--font-serif);
+    font-size: 3em;
+    color: var(--katsuiro);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Style nút Audio tối giản */
+.btn-audio {
+    width: 36px; height: 36px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: white;
+    color: var(--katsuiro);
+    cursor: pointer;
+    margin-left: 15px;
+    transition: 0.2s;
+}
+.btn-audio:hover { transform: scale(1.1); border-color: var(--katsuiro); }
+
+/* TAG STYLE CON DẤU (HANKO) */
+.wd-pos-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 12px;
+    border: 1px solid var(--shuiro);
+    color: var(--shuiro);
+    background: rgba(192, 57, 43, 0.05);
+    font-family: var(--font-serif);
+    font-size: 0.85em;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+.wd-meaning h2 {
+    font-family: var(--font-sans);
+    color: #333;
+    margin: 5px 0 0 0;
+    font-weight: 700;
+}
+
+/* BỐ CỤC BODY */
+.wd-body {
+    display: flex;
+    padding: 30px 40px; /* Padding rộng hơn */
+    gap: 40px;
+}
+.wd-col-left { flex: 1; }
+.wd-col-right { flex: 1.3; }
+@media (max-width: 800px) { .wd-body { flex-direction: column; } }
+
+/* TIÊU ĐỀ SECTION CON */
+.wd-section h3 {
+    font-family: var(--font-serif);
+    color: var(--katsuiro);
+    font-size: 1.2em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+/* Trang trí tiêu đề section bằng 1 ô vuông nhỏ */
+.wd-section h3::before {
+    content: '■';
+    color: var(--shuiro);
+    margin-right: 8px;
+    font-size: 0.8em;
+    vertical-align: 2px;
+}
+
+/* KANJI STYLE - ĐẬM CHẤT THƯ PHÁP */
+.kanji-row {
+    display: flex; gap: 20px; align-items: start; margin-bottom: 20px;
+}
+.k-big {
+    font-family: var(--font-serif); /* Kanji phải dùng Serif mới đẹp */
+    font-size: 4em;
+    color: var(--sumi-text);
+    line-height: 1;
+    background: #fff;
+    border: 2px solid #333; /* Khung đen đậm như khung tranh */
+    padding: 10px;
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.1); /* Bóng cứng */
+}
+
+/* Highlight kiểu bút dạ quang */
+.highlight {
+    background: linear-gradient(to top, rgba(241, 196, 15, 0.4) 50%, transparent 50%);
+    padding: 0 2px;
+    color: inherit;
+    font-weight: bold;
+}
+
+/* Mẹo nhớ (Mnemonic) */
+.k-mnemonic {
+    background-color: #f0f7f4;
+    border-left: 4px solid var(--matcha);
+    padding: 15px;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: #2c3e50;
+}
+
+/* BOX THÔNG TIN PHỤ (Ngữ cảnh, Collocation) */
+.nuance-box, .collocation-box, .synonym-box {
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 0; /* Vuông vức */
+    margin-bottom: 20px;
+    position: relative;
+}
+/* Thêm họa tiết góc nhỏ */
+.nuance-box::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    border-top: 10px solid var(--katsuiro);
+    border-left: 10px solid transparent;
+}
+
+.keigo-list {
+    margin-left: 0; list-style: none;
+    background: #fff; border: 1px solid #eee; padding: 10px;
+}
+.keigo-list li { padding: 5px 0; border-bottom: 1px solid #f5f5f5; }
+.keigo-list li:last-child { border-bottom: none; }
+
+/* VÍ DỤ MẪU */
+.examples-box ol { padding-left: 20px; color: var(--shuiro); }
+.jp-ex {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    color: var(--sumi-text);
+    margin-bottom: 4px;
+}
+.vi-ex { color: #7f8c8d; font-family: var(--font-sans); margin-bottom: 18px; }
+
+/* BẢNG CHIA ĐỘNG TỪ */
+.wd-conjugation {
+    border-top: 2px solid var(--katsuiro); /* Đường kẻ đậm kết thúc */
+    background: #fafafa;
+}
+.wd-conjugation summary {
+    padding: 20px 40px;
+    font-family: var(--font-serif);
+    font-weight: bold;
+    color: var(--katsuiro);
+    cursor: pointer;
+}
+.wd-conjugation summary:hover { background: #eee; }
+
+.conju-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    padding: 20px 40px;
+}
+.c-item {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 2px;
+}
+.c-label { font-size: 0.7em; color: #999; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+.c-val { color: var(--shuiro); font-weight: bold; }
+
+/* --- 2. BENTO GRID SYSTEM (LƯỚI HỘP CƠM) --- */
+.bento-container {
+    display: grid;
+    gap: 20px;
+    /* Định nghĩa 4 cột đều nhau */
+    grid-template-columns: repeat(4, 1fr);
+    /* Định nghĩa các khu vực (Maps HTML vào vị trí) */
+    grid-template-areas:
+        "header header header header"  /* Header chiếm hết 4 cột */
+        "kanji grammar grammar nuance" /* Kanji 1 cột, Grammar 2 cột, Nuance 1 cột */
+        "examples examples examples colloc" /* Ví dụ 3 cột, Colloc 1 cột */
+        "conjugation conjugation conjugation conjugation"; /* Chia động từ chiếm hết */
+}
+
+/* Style chung cho từng ô (Hộp) */
+.bento-item {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px; /* Bo nhẹ kiểu Nhật */
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    position: relative;
+    /* Hiệu ứng vân giấy cho từng ô */
+    background-image: linear-gradient(#fafafa 1px, transparent 1px), linear-gradient(90deg, #fafafa 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.area-header { grid-area: header; border-left: 5px solid var(--shuiro); display: flex; align-items: center; justify-content: space-between; background: #fff;}
+.area-kanji { grid-area: kanji; }
+.area-grammar { grid-area: grammar; }
+.area-nuance { grid-area: nuance; }
+.area-examples { grid-area: examples; }
+.area-colloc { grid-area: colloc; background-color: #fdfdfd; }
+.area-conjugation { grid-area: conjugation; padding: 0; border: none; background: transparent; box-shadow: none; }
+
+/* Block Header */
+.word-primary .w-jp { font-family: var(--font-serif); font-size: 3em; color: var(--katsuiro); line-height: 1; margin-bottom: 10px; }
+.btn-audio-mini { font-size: 0.5em; border: 1px solid #ddd; background: #fff; cursor: pointer; border-radius: 50%; width: 30px; height: 30px; vertical-align: middle; margin-left: 10px;}
+.tag { font-size: 0.75em; padding: 3px 8px; border-radius: 2px; margin-right: 5px; font-weight: bold; letter-spacing: 1px; }
+.tag-pos { background: #ffeaa7; color: #d35400; border: 1px solid #d35400; }
+.tag-jlpt { background: var(--katsuiro); color: #fff; }
+.word-meaning h2 { margin: 0; color: #333; }
+.word-meaning p { color: #666; margin: 5px 0 0 0; }
+
+/* Tiêu đề nhỏ trong mỗi ô */
+.b-title {
+    font-family: var(--font-serif); color: var(--katsuiro); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-bottom: 15px; font-size: 1.1em;
+}
+
+/* Kanji Box */
+.kanji-box { display: flex; gap: 15px; margin-bottom: 15px; }
+.k-char { font-family: var(--font-serif); font-size: 3.5em; line-height: 1; border: 2px solid #333; padding: 5px; background: #fff; color: #333; }
+.k-yomi { list-style: none; font-size: 0.85em; color: #555; }
+.k-yomi li { margin-bottom: 4px; }
+.k-yomi span { font-weight: bold; color: var(--shuiro); width: 30px; display: inline-block;}
+.mnemonic-box { font-size: 0.85em; background: #eef9f0; padding: 10px; border-radius: 4px; color: #27ae60; font-style: italic; }
+
+/* Grammar */
+.grammar-grid .g-row { display: flex; margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 8px; }
+.g-lbl { width: 100px; color: #888; font-size: 0.9em; }
+.g-val { color: #333; font-weight: 500; }
+.trans-pair .active { color: var(--shuiro); font-weight: bold; }
+
+/* Nuance */
+.badge-soft { background: #dff9fb; color: #130f40; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; }
+.keigo-table { margin-top: 10px; font-size: 0.9em; background: #fafafa; padding: 10px; border-radius: 4px; }
+.k-row { margin-bottom: 5px; }
+.mistake-alert { margin-top: 15px; font-size: 0.85em; color: #c0392b; background: #fff5f5; padding: 8px; border-left: 3px solid #c0392b; }
+
+/* Examples & Colloc */
+.example-list { list-style: none; counter-reset: ex-counter; }
+.example-list li { position: relative; padding-left: 25px; margin-bottom: 15px; }
+.example-list li::before {
+    counter-increment: ex-counter; content: counter(ex-counter);
+    position: absolute; left: 0; top: 0;
+    background: var(--katsuiro); color: white; width: 20px; height: 20px;
+    border-radius: 50%; font-size: 0.7em; text-align: center; line-height: 20px;
+}
+.jp { font-weight: bold; color: #2d3436; margin-bottom: 4px; font-size: 1.1em; }
+.vn { color: #636e72; font-size: 0.95em; }
+
+.colloc-list, .synonym-list { padding-left: 20px; font-size: 0.9em; color: #555; }
+.colloc-list li { margin-bottom: 8px; }
+
+/* Conjugation (Full Table) */
+.area-conjugation summary {
+    background: var(--katsuiro); color: #fff; padding: 15px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-bottom: 10px; list-style: none;
+}
+.conju-grid-full {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột đều nhau */
+    gap: 1px; background: #ccc; border: 1px solid #ccc;
+}
+.cj-cell {
+    background: #fff; padding: 15px; text-align: center;
+}
+.cj-cell small { display: block; color: #999; margin-bottom: 5px; text-transform: uppercase; font-size: 0.7em; }
+.cj-cell b { color: var(--shuiro); font-size: 1.1em; }
+
+/* --- STYLE CHO TAB SỔ TAY --- */
+
+/* 1. Form nhập liệu */
+.user-input-area {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--katsuiro); /* Viền trên màu Chàm */
+    margin-bottom: 30px;
+}
+.section-title {
+    font-family: var(--font-serif);
+    color: var(--katsuiro);
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia 2 cột */
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 5px;
+}
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+}
+.input-group input:focus { border-color: var(--katsuiro); outline: none; }
+
+.btn-save {
+    background: var(--katsuiro);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.3s;
+}
+.btn-save:hover { background: var(--shuiro); }
+
+/* 2. Thanh lọc Level */
+.level-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Cho phép cuộn ngang nếu màn hình nhỏ */
+    padding-bottom: 5px;
+}
+.lvl-btn {
+    border: 1px solid #ddd;
+    background: transparent;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #888;
+    transition: 0.3s;
+}
+.lvl-btn:hover, .lvl-btn.active {
+    background: var(--shuiro);
+    color: white;
+    border-color: var(--shuiro);
+}
+
+/* 3. Lưới hiển thị từ vựng (Card) */
+.user-vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.user-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 6px;
+    position: relative;
+    border-left: 5px solid #ccc; /* Màu mặc định */
+    transition: transform 0.2s;
+}
+.user-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+/* Màu viền theo Level */
+.user-card.N5 { border-left-color: #2ecc71; } /* Xanh lá */
+.user-card.N4 { border-left-color: #3498db; } /* Xanh dương */
+.user-card.N3 { border-left-color: #9b59b6; } /* Tím */
+.user-card.N2 { border-left-color: #f1c40f; } /* Vàng */
+.user-card.N1 { border-left-color: #e74c3c; } /* Đỏ */
+
+.uc-word { font-family: var(--font-serif); font-size: 1.5em; font-weight: bold; color: #333; }
+.uc-reading { font-size: 0.9em; color: #888; margin-bottom: 5px; }
+.uc-meaning { font-weight: bold; color: var(--katsuiro); }
+
+.uc-level {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.7em; font-weight: bold;
+    background: #eee; padding: 2px 6px; border-radius: 4px;
+}
+
+.btn-delete {
+    margin-top: 10px;
+    background: none; border: none;
+    color: #e74c3c; cursor: pointer; font-size: 0.8em;
+    text-decoration: underline;
+}
+
+/* RESPONSIVE: Khi màn hình nhỏ thì xếp dọc lại */
+@media (max-width: 1024px) {
+    .bento-container {
+        grid-template-columns: 1fr 1fr; /* Còn 2 cột */
+        grid-template-areas:
+            "header header"
+            "kanji nuance"
+            "grammar grammar"
+            "examples examples"
+            "colloc colloc"
+            "conjugation conjugation";
+    }
+}
+@media (max-width: 600px) {
+    .bento-container {
+        grid-template-columns: 1fr; /* Còn 1 cột */
+        grid-template-areas:
+            "header" "kanji" "grammar" "nuance" "examples" "colloc" "conjugation";
+    }
+    .search-box { width: 100%; }
+}
