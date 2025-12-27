@@ -228,7 +228,34 @@
                     </section>
 
                 <section id="tab-sotay" class="tab-content" style="display: none;">
-                    
+                    <div class="bulk-import-area">
+                        <details>
+                            <summary class="bulk-toggle">🚀 Nhập hàng loạt (Copy từ Excel/Notion)</summary>
+                            <div class="bulk-content">
+                                <textarea id="bulkInput" rows="8" placeholder="
+                                Bước 1: Bấm nút 'Mở công cụ AI' để lấy dữ liệu.
+                                Bước 2: Dán kết quả vào đây (Mỗi dòng 1 từ).
+                                Ví dụ:
+                                雪 - yuki - Tuyết - N5
+                                花 - hana - Hoa - N5"></textarea>
+
+                                <div class="bulk-actions">
+                                    
+                                    <a href="https://gemini.google.com/gem/1Ay9ZDF7vIcWXSi2-oN_9Q6pVhKxfoUiq?usp=sharing" target="_blank" class="link-ai-tool">
+                                        <button type="button" class="btn-ai">
+                                            ✨ Mở công cụ AI
+                                        </button>
+                                    </a>
+
+                                    <button onclick="processBulkImport()" class="btn-bulk">
+                                        ⚡ Lưu vào kho
+                                    </button>
+                                    
+                                    <button onclick="clearBulk()" class="btn-clear">Xóa</button>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
                     <div class="user-input-area">
                         <h2 class="section-title">✍️ Thêm từ mới vào kho</h2>
                         <form id="vocabForm" onsubmit="addVocab(event)">

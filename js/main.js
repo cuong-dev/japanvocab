@@ -214,3 +214,90 @@ function deleteVocab(id) {
         resetFilterButtons();
     }
 }
+
+
+/* --- LOGIC NHẬP HÀNG LOẠT (BULK IMPORT) --- */
+
+function processBulkImport() {
+    const rawText = document.getElementById('bulkInput').value.trim();
+    if (!rawText) {
+        alert("Bạn chưa dán nội dung gì cả!");
+        return;
+    }
+
+    // 1. Tách dòng
+    const lines = rawText.split('\n');
+    
+    // Lấy danh sách cũ
+    let currentList = JSON.parse(localStorage.getItem('myVocabList')) || [];
+    
+    let countSuccess = 0;
+    let countDuplicate = 0;
+    let countError = 0;
+
+    // 2. Duyệt từng dòng
+    lines.forEach(line => {
+        line = line.trim();
+        if (!line) return; // Bỏ qua dòng trống
+
+        // Tách các thành phần: Chấp nhận dấu gạch ngang (-), dấu phẩy (,) hoặc dấu Tab
+        // Regex này tách theo dấu (-, ,, |) 
+        let parts = line.split(/[-|,]/); 
+
+        // Nếu người dùng copy từ Excel, thường là Tab (\t)
+        if (parts.length < 2 && line.includes('\t')) {
+            parts = line.split('\t');
+        }
+
+        // Kiểm tra dữ liệu đủ chưa (Tối thiểu phải có Từ và Nghĩa)
+        if (parts.length >= 2) {
+            const word = parts[0].trim();
+            const reading = parts[1] ? parts[1].trim() : ""; // Có thể để trống cách đọc
+            // Nếu chỉ có 2 phần thì phần 2 là nghĩa, nếu 3 phần thì phần 3 là nghĩa...
+            const meaning = parts[2] ? parts[2].trim() : parts[1].trim(); 
+            // Level: Mặc định N5 nếu không ghi
+            let level = parts[3] ? parts[3].trim().toUpperCase() : "N5";
+            
+            // Chuẩn hóa Level (Chỉ chấp nhận N1-N5)
+            if (!['N1','N2','N3','N4','N5'].includes(level)) level = "N5";
+
+            // --- KIỂM TRA TRÙNG LẶP (Logic đơn giản hóa cho Import) ---
+            const isExist = currentList.some(item => item.word.toLowerCase() === word.toLowerCase());
+
+            if (!isExist) {
+                // Thêm mới
+                currentList.unshift({
+                    id: Date.now() + Math.random(), // Thêm random để tránh trùng ID khi chạy vòng lặp quá nhanh
+                    word, reading, meaning, level
+                });
+                countSuccess++;
+            } else {
+                countDuplicate++;
+            }
+        } else {
+            countError++;
+        }
+    });
+
+    // 3. Lưu lại và Thông báo kết quả
+    localStorage.setItem('myVocabList', JSON.stringify(currentList));
+    
+    // Vẽ lại danh sách
+    renderVocabList('ALL');
+    resetFilterButtons();
+
+    // Reset ô nhập
+    document.getElementById('bulkInput').value = '';
+
+    // Báo cáo
+    alert(
+        `📊 BÁO CÁO NHẬP LIỆU:\n\n` +
+        `✅ Thành công: ${countSuccess} từ\n` +
+        `⚠️ Bỏ qua (Trùng lặp): ${countDuplicate} từ\n` +
+        `❌ Lỗi định dạng: ${countError} dòng`
+    );
+}
+
+function clearBulk() {
+    document.getElementById('bulkInput').value = '';
+}

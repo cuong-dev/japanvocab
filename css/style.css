@@ -588,6 +588,98 @@ body {
     text-decoration: underline;
 }
 
+
+/* --- BULK IMPORT STYLE --- */
+.bulk-import-area {
+    margin-bottom: 20px;
+    background: #fdfdfd;
+    border: 1px dashed var(--katsuiro);
+    border-radius: 8px;
+}
+
+.bulk-toggle {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--katsuiro);
+    list-style: none; /* Ẩn mũi tên mặc định */
+    outline: none;
+}
+/* Tạo mũi tên custom */
+.bulk-toggle::after {
+    content: '+'; float: right; font-weight: bold; font-size: 1.2em;
+}
+details[open] .bulk-toggle::after { content: '-'; }
+
+.bulk-content {
+    padding: 0 20px 20px 20px;
+    border-top: 1px dashed #eee;
+}
+
+.bulk-guide {
+    font-size: 0.9em; margin: 10px 0; color: #666; background: #eee; padding: 10px; border-radius: 4px;
+}
+.bulk-guide code { color: var(--shuiro); font-weight: bold; }
+
+#bulkInput {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: monospace; /* Dùng font monospace để canh dòng dễ hơn */
+    font-size: 14px;
+    margin-bottom: 10px;
+    resize: vertical; /* Cho phép kéo giãn chiều dọc */
+}
+
+.bulk-actions { display: flex; gap: 10px; }
+
+.btn-bulk {
+    background: var(--matcha); /* Màu xanh lá cây */
+    color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; flex: 1;
+}
+.btn-bulk:hover { background: #219150; }
+
+.btn-clear {
+    background: #ecf0f1; color: #333; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;
+}
+
+/* --- STYLE CHO NÚT AI MỚI --- */
+
+/* Thẻ a bao quanh nút */
+.link-ai-tool {
+    text-decoration: none;
+    flex: 1.5; /* Chiếm diện tích lớn hơn các nút khác */
+}
+
+.btn-ai {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe); /* Màu tím hiện đại */
+    color: white;
+    border: none;
+    padding: 12px 15px; /* Cao hơn một chút cho dễ bấm */
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Khoảng cách giữa icon và chữ */
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(108, 92, 231, 0.2);
+}
+
+.btn-ai:hover {
+    transform: translateY(-2px); /* Nhấc nhẹ lên khi di chuột */
+    box-shadow: 0 6px 12px rgba(108, 92, 231, 0.3);
+    background: linear-gradient(135deg, #5b4cc4, #9188e5);
+}
+
+/* Thêm icon lấp lánh bằng CSS pseudo-element (Tuỳ chọn) */
+.btn-ai::before {
+    content: '✨';
+}
+
 /* RESPONSIVE: Khi màn hình nhỏ thì xếp dọc lại */
 @media (max-width: 1024px) {
     .bento-container {
