@@ -46,18 +46,24 @@
                         
                         <div class="sticky-search-header">
                             <div class="search-box-wrapper">
-                                <h1 class="page-title">辞書 • Từ điển</h1>
-                                <div class="search-box">
-                                    <input type="text" id="searchInput" placeholder="Nhập từ vựng (Vd: 食べる)...">
-                                    <button onclick="mockSearch()">Tra cứu</button>
+                                <div class="header-row">
+                                    <h1 class="page-title">辞書 • Từ điển AI</h1>
+                                    
+                                    <div class="search-box">
+                                        <input type="text" id="searchInput" 
+                                            placeholder="Nhập từ vựng (Vd: 食べる)..." 
+                                            onkeypress="handleEnter(event)">
+                                        <button onclick="handleAISearch()">🤖 Tra AI</button>
+                                    </div>
+                                </div>
+
+                                <div id="loadingSpinner" class="loading-msg" style="display:none;">
+                                    <span class="spinner">⏳</span> Đang huy động AI phân tích 16 mục dữ liệu...
                                 </div>
                             </div>
                         </div>
 
-                        <div id="searchPlaceholder" class="placeholder-screen">
-                            <div class="p-icon">🗻</div>
-                            <h3>Nhập từ vựng để khám phá</h3>
-                        </div>
+                       
 
                         <div id="searchResultArea" style="display: none;">
                             
@@ -66,17 +72,35 @@
                                 <div class="bento-item area-header">
                                     <div class="word-primary">
                                         <div class="w-jp">
-                                            <ruby>食<rt>た</rt></ruby>べる
-                                            <button class="btn-audio-mini">🔊</button>
+                                                <span id="mainWord">
+                                                    <ruby>食<rt>た</rt></ruby>べる
+                                                </span>
+                                                <button class="btn-audio-mini" onclick="speakWord()">🔊</button>
                                         </div>
                                         <div class="w-tags">
-                                            <span class="tag tag-pos">Động từ Nhóm 2</span>
-                                            <span class="tag tag-jlpt">N5</span>
+                                            <span class="tag tag-pos editable">Động từ Nhóm 2</span>
+                                            <span class="tag tag-jlpt editable">N5</span>
                                         </div>
                                     </div>
+                                    
                                     <div class="word-meaning">
-                                        <h2>Ăn, dùng bữa</h2>
-                                        <p>Hành động đưa thức ăn vào miệng, nhai và nuốt.</p>
+                                        <h2 class="editable">Ăn, dùng bữa</h2>
+                                        <p class="editable">Hành động đưa thức ăn vào miệng, nhai và nuốt.</p>
+                                    </div>
+                                    <div class="card-toolbar" contenteditable="false">
+                                        
+                                        <button id="btnEdit" onclick="enableGlobalEdit()" class="tool-btn edit">
+                                            ✏️ Sửa
+                                        </button>
+                                        
+                                        <button id="btnCancel" onclick="cancelEdit()" class="tool-btn cancel" style="display: none;">
+                                            ✖ Hủy
+                                        </button>
+
+                                        <button id="btnSave" onclick="saveGlobalContent()" class="tool-btn save">
+                                            💾 Lưu
+                                        </button>
+                                        
                                     </div>
                                 </div>
 
@@ -86,11 +110,18 @@
                                         <div class="k-char">食</div>
                                         <div class="k-info">
                                             <div class="k-name">THỰC</div>
+                                            
                                             <ul class="k-yomi">
-                                                <li><span>Kun:</span> ta(beru), ku(u)</li>
-                                                <li><span>On:</span> SHOKU, JIKI</li>
+                                                <li>
+                                                    <span class="y-lbl kun">訓</span> 
+                                                    ta(beru), ku(u)
+                                                </li>
+                                                <li>
+                                                    <span class="y-lbl on">音</span> 
+                                                    SHOKU, JIKI
+                                                </li>
                                             </ul>
-                                        </div>
+                                            </div>
                                     </div>
                                     <div class="mnemonic-box">
                                         <strong>💡 Ghi nhớ:</strong>
@@ -99,7 +130,7 @@
                                 </div>
 
                                 <div class="bento-item area-grammar">
-                                    <h4 class="b-title">⚙️ Cấu trúc từ</h4>
+                                    <h4 class="b-title">⚙️ Cấu trúc & Từ gia đình</h4>
                                     <div class="grammar-grid">
                                         <div class="g-row">
                                             <span class="g-lbl">Trợ từ:</span>
@@ -111,11 +142,20 @@
                                                 <span class="active">Tha: 食べる</span> ↔ <span>Tự: 食べられる</span>
                                             </div>
                                         </div>
-                                        <div class="g-row">
-                                            <span class="g-lbl">Từ gia đình:</span>
-                                            <div class="fam-words">
-                                                <span>食べ物 (Đồ ăn)</span>, <span>食堂 (Nhà ăn)</span>
+                                        
+                                        <div class="jukugo-section">
+                                            <div class="jukugo-header">🈴 Từ ghép Hán tự (Jukugo)</div>
+                                            <div class="jukugo-list">
+                                                <span class="tag-jukugo" title="Bữa ăn">食事 (Shokuji)</span>
+                                                <span class="tag-jukugo" title="Nhà ăn">食堂 (Shokudou)</span>
+                                                <span class="tag-jukugo" title="Thực phẩm">食品 (Shokuhin)</span>
+                                                <span class="tag-jukugo" title="Ăn nhẹ/Ăn vặt">間食 (Kanshoku)</span>
                                             </div>
+                                        </div>
+
+                                        <div class="g-row no-border">
+                                            <span class="g-lbl">Biến thể:</span>
+                                            <span class="g-val">食べ物 (Đồ ăn - N)</span>
                                         </div>
                                     </div>
                                 </div>
@@ -159,6 +199,14 @@
                                             <p class="jp">一緒に昼ご飯を<strong>食べよう</strong>。</p>
                                             <p class="vn">Cùng đi ăn trưa nhé.</p>
                                         </li>
+                                        <li>
+                                            <p class="jp">嫌いなものでも、残さず<strong>食べなさい</strong>。</p>
+                                            <p class="vn">Dù là đồ không thích cũng hãy ăn hết đi (đừng bỏ thừa).</p>
+                                        </li>
+                                        <li>
+                                            <p class="jp">あそこで<strong>食べて</strong>いる人は誰ですか。</p>
+                                            <p class="vn">Người đang ăn ở đằng kia là ai vậy?</p>
+                                        </li>
                                     </ul>
                                 </div>
 
@@ -169,13 +217,25 @@
                                         <li>外食する (Ăn tiệm)</li>
                                         <li>箸で食べる (Ăn bằng đũa)</li>
                                     </ul>
-                                    <h4 class="b-title mt-2">🔄 Đồng nghĩa</h4>
-                                    <ul class="synonym-list">
-                                        <li>食らう (Thô tục)</li>
-                                        <li>摂る (Hấp thụ/Dùng bữa)</li>
-                                    </ul>
+                                    
+                                    <div class="synonym-antonym-box">
+                                        <div class="sa-row">
+                                            <span class="sa-label syn">🔄 Đồng nghĩa:</span>
+                                            <ul class="sa-list">
+                                                <li>食らう (Thô tục)</li>
+                                                <li>摂る (Dùng bữa)</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="sa-row">
+                                            <span class="sa-label ant">↔️ Trái nghĩa:</span>
+                                            <ul class="sa-list">
+                                                <li>絶食する (Tuyệt thực)</li>
+                                                <li>吐く (Nôn ra)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-
                                 <div class="bento-item area-conjugation">
                                     <details open> <summary>⚡ Bảng chia 12 thể động từ</summary>
                                         <div class="conju-grid-full">
